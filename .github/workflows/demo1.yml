@@ -1,8 +1,13 @@
-name: hello-world
-'on': push
+name: Testim E2E
+on: [push]
+
 jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: my-step
-        run: echo "Hello World!"
+    run-testimio-cli:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v2
+              with:
+                node-version: '16.13.0'
+            - run: npm install -g @testim/testim-cli
+            - run: testim --token "AbWAEBLQYf0JfuoCnH13NzRjBWEIdCIgZNEWsZHme2EMMfgpPL" --project "QHUZxeYKHQRxTLmLWJu4" --grid "Testim-Grid" --mode "extension" --branch "master" --test-config "FHD 1920x1080" --parallel 1 --retries 1 --timeout 120000
